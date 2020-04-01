@@ -29,12 +29,6 @@ public class Motor : MonoBehaviour
         //Default is driving forward, if "HIGH" is sent through this function, motor will reverse
         motorSign = isHigh ? -1 : 1;
     }
-    //Conversion method, only used in case HIGH/LOW is used as an int instead of bool.
-    public void SetDirection(int isHigh)
-    {
-        bool isHighBool = isHigh == 0 ? false : true;
-        SetDirection(isHighBool);
-    }
 
     public void SetSpeed(int analogValue)
     {
