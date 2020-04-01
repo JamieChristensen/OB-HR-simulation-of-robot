@@ -907,7 +907,7 @@ GameObject:
   - component: {fileID: 892522527}
   - component: {fileID: 892522528}
   m_Layer: 0
-  m_Name: H-Bridge direction1 pin
+  m_Name: H-Bridge forwards pin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -952,7 +952,7 @@ GameObject:
   - component: {fileID: 1162879060}
   - component: {fileID: 1162879061}
   m_Layer: 0
-  m_Name: H-Bridge direction2 pin
+  m_Name: H-Bridge backwards pin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1029,7 +1029,7 @@ GameObject:
   - component: {fileID: 1717810100}
   - component: {fileID: 1717810101}
   m_Layer: 0
-  m_Name: H-Bridge direction2 pin
+  m_Name: H-Bridge backwards pin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1199,7 +1199,7 @@ GameObject:
   - component: {fileID: 1746322963}
   - component: {fileID: 1746322964}
   m_Layer: 0
-  m_Name: H-Bridge direction1 pin
+  m_Name: H-Bridge forwards pin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
