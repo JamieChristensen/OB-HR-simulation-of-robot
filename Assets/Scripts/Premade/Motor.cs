@@ -7,7 +7,7 @@ using ArduinoFunctions;
 public class Motor : MonoBehaviour
 {
     public Rigidbody wheel;
-    
+
     [SerializeField]
     private float maxMotorTorque = 80;
 
@@ -15,31 +15,10 @@ public class Motor : MonoBehaviour
 
     private int motorSign = 1; //-1 or 1;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetKey(KeyCode.Space))
-        {
-            SetSpeed(0);
-            return;
-        }
-        //Test:
-        SetSpeed(1023);
-        SetDirection(false);
-
-
-    }
 
     void FixedUpdate()
     {
         //Updates direction and speed
-
         wheel.AddRelativeTorque(Vector3.right * motorTorque * motorSign, ForceMode.Force);
     }
 
