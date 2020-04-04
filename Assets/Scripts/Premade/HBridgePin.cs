@@ -26,23 +26,26 @@ public class HBridgePin : ArduinoObject
 
     override public int analogRead()
     {
+        //Not sure what reading on a H-bridge would return. Could debug a warning.
         throw new NotImplementedException();
     }
     override public void analogWrite(int value)
     {
-        if (value < 0 || value > 1023)
+        if (value < 0 || value > 255)
         {
-            Debug.LogWarning("analogWrite used with values outside range of [0;1023], value was clamped within this range.");
+            Debug.LogWarning("analogWrite used with values outside range of [0;255], value was clamped within this range.");
         }
-        int val = Mathf.Clamp(value, 0, 1023);
+        int val = Mathf.Clamp(value, 0, 255);
         hBridge.SetMotorSpeedAndDirection(pinType, val);
-    } //from 0 to 1023
+    } 
     override public bool digitalRead()
     {
+        //Not sure what reading on a H-bridge would return. Could debug a warning.
         throw new NotImplementedException();
     }
     override public void digitalWrite(bool isHigh)
     {
+        //Could have this analogWrite with max or minimum values 255 and 0 respectively. For now it's not implemented.
         throw new NotImplementedException();
     }
 

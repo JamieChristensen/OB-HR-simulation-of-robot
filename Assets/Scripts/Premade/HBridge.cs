@@ -7,8 +7,8 @@ public class HBridge : MonoBehaviour
 {
     [SerializeField]
     private Motor motor;
-    private int speedForwards, speedBackwards; //Values from 0 to 1023
-    private int totalSpeed; //Values from 0 to 1023, it's the absolute value of the difference between speedFowards and speedBackwards.
+    private int speedForwards, speedBackwards; //Values from 0 to 255
+    private int totalSpeed; //Values from 0 to 255, it's the absolute value of the difference between speedFowards and speedBackwards.
     private bool direction; //false = forwards, true = backwards.
 
     public void SetMotorSpeedAndDirection(HBridgePin.PinType pinType, int value)
@@ -35,8 +35,8 @@ public class HBridge : MonoBehaviour
 
         int diff = speedForwards-speedBackwards;
         totalSpeed = Math.Abs(diff);
-        direction = Math.Sign(diff) == 1 ? false : true; //Drive forwads(false), when speedForwards>speedBackwards and vice-versa. In the case of 0, the totalSpeed will be 0 anyway.
-
+        //Drive forwards(false), when speedForwards>speedBackwards and vice-versa. In the case of 0, the totalSpeed will be 0 anyway.
+        direction = Math.Sign(diff) == 1 ? false : true; 
     }
 
 }
