@@ -19,7 +19,7 @@ public class Motor : MonoBehaviour
 
     void Start()
     {
-        maxMotorTorque = 14; 
+        maxMotorTorque = 25; 
         wheel.maxAngularVelocity = maxMotorTorque;
     }
 
