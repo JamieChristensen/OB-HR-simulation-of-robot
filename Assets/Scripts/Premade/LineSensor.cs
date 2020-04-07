@@ -6,12 +6,17 @@ using System;
 public class LineSensor : ArduinoObject
 {
     public LayerMask raycastMask;
-    
+
     [SerializeField]
     private Transform raycastTransform; //Assign in inspector - it's there for a functional minimum and maximum range to work.
     private const int pixelsToAverage = 2; //(pixelsToAverage+1)^2 = amount of pixels that will be averaged. A bit of a misleading name.
     private const float raycastRange = 1.5f;
-    
+
+    void Start()
+    {
+        Debug.Assert(raycastTransform != null, "rayCastTransform missing from LineSensor.cs component - revert to prefab settings or assign manually");
+    } 
+
     /*
     void Update()
     {
