@@ -37,8 +37,7 @@ public class ArduinoMain : MonoBehaviour
     IEnumerator loop()
     {
         //Drives forwards on both wheels, assuming H-bridge pins assigned in arduinoObjects 0 through 3. (and forward pins are set to 1023).:
-        //Debug.Log("predelay");
-        //Debug.Log("postdelay");
+        
         int leftSensor = arduinoObjects[4].analogRead() / 4;
         int rightSensor = arduinoObjects[5].analogRead() / 4;
         int leftWrite = (int)ArduinoFunctions.Functions.map(leftSensor, 0, 255, 255, 0);
@@ -47,9 +46,10 @@ public class ArduinoMain : MonoBehaviour
         arduinoObjects[1].analogWrite(leftSensor <= leftWrite ? leftWrite / 1 : 0);
         arduinoObjects[2].analogWrite((int)(rightSensor > rightWrite ? rightSensor / 2 : 0));
         arduinoObjects[3].analogWrite(rightSensor <= rightWrite ? rightWrite / 1 : 0);
+        
 
 
-        Debug.Log("millis: " + millis());
+
 
 
 
