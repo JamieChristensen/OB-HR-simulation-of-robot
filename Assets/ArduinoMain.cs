@@ -51,8 +51,6 @@ public class ArduinoMain : MonoBehaviour
 
 
 
-
-
         //Following region is implemented as to allow "yield return delay()" to function the same way as one would expect it to on Arduino.
         //It should always be at the end of the loop()-function, and shouldn't be edited.
         #region DoNotDelete

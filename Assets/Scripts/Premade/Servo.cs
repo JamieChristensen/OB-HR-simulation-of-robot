@@ -29,15 +29,12 @@ public class Servo : MonoBehaviour
 
     public void write(int angle)
     {
-        targetAngle = angle;
+        targetAngle = Mathf.Clamp(angle, 1, 179);
     }
 
     public int read()
     {
         return targetAngle;
     }
-
-
-
 
 }
