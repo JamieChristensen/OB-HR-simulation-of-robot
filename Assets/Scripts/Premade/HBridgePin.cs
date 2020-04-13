@@ -37,7 +37,7 @@ public class HBridgePin : ArduinoObject
         }
         int val = Mathf.Clamp(value, 0, 255);
         hBridge.SetMotorSpeedAndDirection(pinType, val);
-    } 
+    }
     override public bool digitalRead()
     {
         //Not sure what reading on a H-bridge would return. Could debug a warning.
@@ -45,8 +45,8 @@ public class HBridgePin : ArduinoObject
     }
     override public void digitalWrite(bool isHigh)
     {
-        //Could have this analogWrite with max or minimum values 255 and 0 respectively. For now it's not implemented.
-        throw new NotImplementedException();
+        int val = isHigh ? 255 : 0;
+        analogWrite(val);
     }
 
 

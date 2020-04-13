@@ -5,6 +5,7 @@ using System.Threading;
 
 public class ArduinoMain : MonoBehaviour
 {
+    public Breadboard breadboard;
     //On included/premade Arduino functions:
     //delay(timeInMilliseconds) : use "yield return delay(timeInMilliseconds)", to get similar functionality as delay() in arduino would give you.
 
@@ -15,25 +16,37 @@ public class ArduinoMain : MonoBehaviour
 
     //If you want to do something similar to serial.println(), use Debug.Log(). 
 
+    //analogWrite() and analogRead() works as they do in arduino - remember to give them correct input-values.
+    //digitalRead() and digitalWrite() writes and returns bools. (High = true). 
+    //LineSensors have both write-functions implemented, motors/hbridge have both read-functions implemented.
+
+    //The console will display a "NotImplementedException" if you attempt to write to sensors or read from motors. 
+
     IEnumerator setup()
     {
+        //Your code goes here:
 
+        //Example of delay:
+        Debug.Log("pre-delay log");
+        yield return delay(2000); //2 second delay
+        Debug.Log("After delay");
 
+        //Your code ends here -----
 
-
-
-        //following region ensures delay-functionality for setup(). Do not delete, must always be last thing in setup.
+        //following region ensures delay-functionality for setup() & loop(). Do not delete, must always be last thing in setup.
         #region PremadeSetup
-        yield return null;
+        yield return StartCoroutine(loop()); ;
         #endregion PremadeSetup
     }
 
     IEnumerator loop()
     {
-        //Drives forwards on both wheels, assuming H-bridge pins assigned in arduinoObjects 0 through 3. (and forward pins are set to 1023).:
+        //Your code goes here:
 
-
-
+        //Example analogRead:
+        int value = analogRead(5);
+        Debug.Log(value + " value at pin 5");
+        //Your code ends here -----
 
         //Following region is implemented as to allow "yield return delay()" to function the same way as one would expect it to on Arduino.
         //It should always be at the end of the loop()-function, and shouldn't be edited.
@@ -52,7 +65,7 @@ public class ArduinoMain : MonoBehaviour
     {
         Time.fixedDeltaTime = 0.005f; //4x physics steps of what unity normally does - to improve sensor-performance.
         StartCoroutine(setup());
-        StartCoroutine(loop());
+
     }
 
     IEnumerator delay(int _durationInMilliseconds)
@@ -74,11 +87,6 @@ public class ArduinoMain : MonoBehaviour
     #endregion PremadeDefinitions
 
     #region InterfacingWithBreadboard
-    //These references ensure arduino-like syntax, and rely on the proper components being assigned to this script in the inspector.
-    #region PremadeReferences
-    public Breadboard breadboard;
-
-    #endregion PremadeReferences
     public int analogRead(int pin)
     {
         return breadboard.analogRead(pin);
