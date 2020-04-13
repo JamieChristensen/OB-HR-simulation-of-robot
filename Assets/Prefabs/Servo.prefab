@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 9065064804262262120}
   - component: {fileID: 9065064804262262123}
   - component: {fileID: 9065064804262262122}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Servo-arm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -104,7 +104,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9065064804751737895}
   - component: {fileID: 9065064804751737892}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Servo-rotationCenter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -152,7 +152,7 @@ GameObject:
   - component: {fileID: 9065064804791943361}
   - component: {fileID: 9065064804791943360}
   - component: {fileID: 9065064804791943363}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -242,7 +242,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9065064804848565394}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Servo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -256,9 +256,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9065064804848565388}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.037499905, y: 1.5, z: -0.27250266}
-  m_LocalScale: {x: 0.125, y: 1, z: 0.12330457}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 9065064804751737895}
   - {fileID: 9065064805137344864}
@@ -277,7 +277,7 @@ GameObject:
   - component: {fileID: 9065064805075413236}
   - component: {fileID: 9065064805075413239}
   - component: {fileID: 9065064805075413238}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -370,7 +370,7 @@ GameObject:
   - component: {fileID: 9065064805120133132}
   - component: {fileID: 9065064805120133135}
   - component: {fileID: 9065064805120133134}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -463,7 +463,7 @@ GameObject:
   - component: {fileID: 9065064805137344871}
   - component: {fileID: 9065064805137344870}
   - component: {fileID: 9065064805137344865}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Servo-backside
   m_TagString: Untagged
   m_Icon: {fileID: 0}

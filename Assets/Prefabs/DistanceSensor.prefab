@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5804117979467005320}
   - component: {fileID: 5804117979467005323}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Point Light (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -104,7 +104,7 @@ GameObject:
   - component: {fileID: 5804117979546190504}
   - component: {fileID: 5804117979546190505}
   - component: {fileID: 5804117979546190518}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -201,7 +201,7 @@ GameObject:
   - component: {fileID: 5804117979866386311}
   - component: {fileID: 5804117979866386308}
   - component: {fileID: 5804117979866386309}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -292,7 +292,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5804117980960619088}
   - component: {fileID: 5804117980960619091}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: DistanceSensor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -306,9 +306,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5804117980960619089}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.031, y: 2.42, z: -0.27250266}
-  m_LocalScale: {x: 0.125, y: 1, z: 0.12330457}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5804117979546190519}
   m_Father: {fileID: 0}
@@ -341,7 +341,7 @@ GameObject:
   - component: {fileID: 5804117981018122485}
   - component: {fileID: 5804117981018122482}
   - component: {fileID: 5804117981018122483}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -432,7 +432,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5804117981034653860}
   - component: {fileID: 5804117981034653863}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}

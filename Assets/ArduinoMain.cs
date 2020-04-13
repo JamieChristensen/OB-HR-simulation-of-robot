@@ -5,12 +5,6 @@ using System.Threading;
 
 public class ArduinoMain : MonoBehaviour
 {
-    //These references ensure arduino-like syntax, and rely on the proper components being assigned to this script in the inspector.
-    #region PremadeReferences
-    public ArduinoObject[] arduinoObjects;
-
-    #endregion PremadeReferences
-
     //On included/premade Arduino functions:
     //delay(timeInMilliseconds) : use "yield return delay(timeInMilliseconds)", to get similar functionality as delay() in arduino would give you.
 
@@ -37,17 +31,14 @@ public class ArduinoMain : MonoBehaviour
     IEnumerator loop()
     {
         //Drives forwards on both wheels, assuming H-bridge pins assigned in arduinoObjects 0 through 3. (and forward pins are set to 1023).:
-        
-        int leftSensor = arduinoObjects[4].analogRead() / 4;
-        int rightSensor = arduinoObjects[5].analogRead() / 4;
+        int leftSensor = analogRead(4) / 4;
+        int rightSensor = analogRead(5) / 4;
         int leftWrite = (int)ArduinoFunctions.Functions.map(leftSensor, 0, 255, 255, 0);
         int rightWrite = (int)ArduinoFunctions.Functions.map(rightSensor, 0, 255, 255, 0);
-        arduinoObjects[0].analogWrite((int)(leftSensor > leftWrite ? leftSensor / 2 : 0));
-        arduinoObjects[1].analogWrite(leftSensor <= leftWrite ? leftWrite / 1 : 0);
-        arduinoObjects[2].analogWrite((int)(rightSensor > rightWrite ? rightSensor / 2 : 0));
-        arduinoObjects[3].analogWrite(rightSensor <= rightWrite ? rightWrite / 1 : 0);
-        
-
+        analogWrite(0, (int)(leftSensor > leftWrite ? leftSensor / 2 : 0));
+        analogWrite(1, leftSensor <= leftWrite ? leftWrite / 1 : 0);
+        analogWrite(2, (int)(rightSensor > rightWrite ? rightSensor / 2 : 0));
+        analogWrite(3, rightSensor <= rightWrite ? rightWrite / 1 : 0);
 
 
 
@@ -88,4 +79,28 @@ public class ArduinoMain : MonoBehaviour
     }
 
     #endregion PremadeDefinitions
+
+    #region InterfacingWithBreadboard
+    //These references ensure arduino-like syntax, and rely on the proper components being assigned to this script in the inspector.
+    #region PremadeReferences
+    public Breadboard breadboard;
+
+    #endregion PremadeReferences
+    public int analogRead(int pin)
+    {
+        return breadboard.analogRead(pin);
+    }
+    public void analogWrite(int pin, int value)
+    {
+        breadboard.analogWrite(pin, value);
+    }
+    public bool digitalRead(int pin)
+    {
+        return breadboard.digitalRead(pin);
+    }
+    public void digitalWrite(int pin, bool isHigh)
+    {
+        breadboard.digitalWrite(pin, isHigh);
+    }
+    #endregion InterfacingWithBreadboard
 }

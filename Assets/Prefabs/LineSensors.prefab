@@ -289,7 +289,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2139904530648788363}
   - component: {fileID: 2139904530648788362}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: LineSensorLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -492,7 +492,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2139904531361599980}
   - component: {fileID: 2139904531361599971}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: LineSensorRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -555,7 +555,7 @@ Transform:
   m_GameObject: {fileID: 3209237768467195931}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 8, y: 1, z: 8.11}
   m_Children:
   - {fileID: 2139904530648788363}
   - {fileID: 2139904531361599980}
