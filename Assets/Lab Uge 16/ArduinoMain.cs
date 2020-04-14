@@ -28,8 +28,7 @@ public class ArduinoMain : MonoBehaviour
 
         //Example of delay:
         Debug.Log("pre-delay log");
-        yield return delay(2000); //2 second delay
-        Debug.Log("After delay");
+        //yield return delay(2000); //2 second delay
 
         //Your code ends here -----
 
@@ -42,12 +41,14 @@ public class ArduinoMain : MonoBehaviour
     IEnumerator loop()
     {
         //Your code goes here:
-
-        //Example analogRead:
-        int value = analogRead(5);
-        Debug.Log(value + " value at pin 5");
-        //Your code ends here -----
-
+        int leftSensor = analogRead(4) / 4;
+        int rightSensor = analogRead(5) / 4;
+        int leftWrite = (int)ArduinoFunctions.Functions.map(leftSensor, 0, 255, 255, 0);
+        int rightWrite = (int)ArduinoFunctions.Functions.map(rightSensor, 0, 255, 255, 0);
+        analogWrite(0, (int)(leftSensor > leftWrite ? leftSensor / 2 : 0));
+        analogWrite(1, leftSensor <= leftWrite ? leftWrite / 1 : 0);
+        analogWrite(2, (int)(rightSensor > rightWrite ? rightSensor / 2 : 0));
+        analogWrite(3, rightSensor <= rightWrite ? rightWrite / 1 : 0);
         //Following region is implemented as to allow "yield return delay()" to function the same way as one would expect it to on Arduino.
         //It should always be at the end of the loop()-function, and shouldn't be edited.
         #region DoNotDelete
