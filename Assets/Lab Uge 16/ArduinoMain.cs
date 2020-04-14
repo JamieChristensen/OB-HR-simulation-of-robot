@@ -85,6 +85,17 @@ public class ArduinoMain : MonoBehaviour
         return (ulong)(Time.timeSinceLevelLoad * 1000f);
     }
 
+    public ulong abs(long x) 
+    {
+        return Mathf.Abs(x);
+    }
+
+    public long constrain(long x, long a, long b)
+    {
+        return (x < a ? a : (x > b ? b : x));
+    }
+
+
     #endregion PremadeDefinitions
 
     #region InterfacingWithBreadboard
