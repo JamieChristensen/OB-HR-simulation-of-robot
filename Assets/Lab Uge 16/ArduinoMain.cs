@@ -87,7 +87,7 @@ public class ArduinoMain : MonoBehaviour
 
     public ulong abs(long x) 
     {
-        return Mathf.Abs(x);
+        return (ulong)Mathf.Abs(x);
     }
 
     public long constrain(long x, long a, long b)
