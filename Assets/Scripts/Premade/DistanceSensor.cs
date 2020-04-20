@@ -17,10 +17,12 @@ public class DistanceSensor : ArduinoObject
 
     private void Update()
     {
-        analogRead();
+        //Debug.Log("Pulse distance calculated: " + ((pulseIn() *0.034)/2));
     }
 
-    override public int analogRead()
+
+
+    override public ulong pulseIn()
     {
         Vector3 direction = transform.right * -1;
         RaycastHit raycastHit;
@@ -31,12 +33,22 @@ public class DistanceSensor : ArduinoObject
         {
             distance = raycastHit.distance;
         }
-
-
-
-        return (int)distance;
+        else //Raycast hits nothing:
+        {
+            return 0;
+        }
+        //Debug.Log("Distance, raw: " + distance);
+        float time = (distance/0.034f) * 2;
+        //Debug.Log("time, float: " + time);
+        //Debug.Log("time, ulong: " + (ulong)time);
+        
+        return (ulong)time;
     }
 
+    override public int analogRead()
+    {
+        throw new NotImplementedException();
+    }
     override public void analogWrite(int value)
     {
         throw new NotImplementedException();

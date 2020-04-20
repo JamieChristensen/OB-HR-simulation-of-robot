@@ -139,7 +139,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentAngle: 0
-  targetAngle: 179
+  targetAngle: 0
 --- !u!1 &9065064804791943357
 GameObject:
   m_ObjectHideFlags: 0
