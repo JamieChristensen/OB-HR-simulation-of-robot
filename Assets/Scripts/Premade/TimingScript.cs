@@ -2,12 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-public class TimingScr : MonoBehaviour
+public class TimingScript : MonoBehaviour
 {
     private string timerString = "Timer: ";
     private float timer;
     public TextMeshProUGUI text;
-    public ArduinoMain arduinoMain;
 
     private bool timeUp;
     void Start()

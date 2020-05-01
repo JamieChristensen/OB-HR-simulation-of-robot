@@ -49,7 +49,7 @@ public class ArduinoMain : MonoBehaviour
 
         //Example of delay:
         Debug.Log("pre-delay log");
-        yield return delay(2000); //2 second delay
+        yield return delay(20); //2 second delay
         //Your code ends here -----
 
         //following region ensures delay-functionality for setup() & loop(). Do not delete, must always be last thing in setup.
@@ -60,28 +60,160 @@ public class ArduinoMain : MonoBehaviour
 
     float servoAngle;
     ulong currentMillis;
+
+    bool gotToPillar = false;
+    bool passedPillar = false;
+
+    int forwardDriveLeftPin = 0;
+    int backwardDriveLeftPin = 1;
+    int forwardDriveRightPin = 2;
+    int backwardDriveRightPin = 3;
+
+    public bool reachedEndOfLine = false;
+    private bool turnedLeft;
+
     IEnumerator loop()
     {
-        //Your code goes here:
+        ulong time;
+        float distance;
         int leftSensor = analogRead(4) / 4;
         int rightSensor = analogRead(5) / 4;
-        int leftWrite = (int)ArduinoFunctions.Functions.map(leftSensor, 0, 255, 255, 0);
-        int rightWrite = (int)ArduinoFunctions.Functions.map(rightSensor, 0, 255, 255, 0);
-        analogWrite(0, (int)(leftSensor > leftWrite ? leftSensor / 2 : 0));
-        analogWrite(1, leftSensor <= leftWrite ? leftWrite / 1 : 0);
-        analogWrite(2, (int)(rightSensor > rightWrite ? rightSensor / 2 : 0));
-        analogWrite(3, rightSensor <= rightWrite ? rightWrite / 1 : 0);
 
-        Debug.Log("servo angle read: " + servo.read());
-        float timeBetweenMillis = millis() - currentMillis;
-        currentMillis = millis();
+        //Delay for the sake of being able to detect the end of the line
+        if (passedPillar)
+        {
+            yield return delay(10);
+        }
 
-        servoAngle += timeBetweenMillis * 0.001f * 10;
-        servoAngle %= 180;
+        //If the end of the line is detected:
+        if (analogRead(4) < 300 && analogRead(5) < 300)
+        {
+            reachedEndOfLine = true;
+            analogWrite(0, 0);
+            analogWrite(1, 0);
+            analogWrite(2, 0);
+            analogWrite(3, 0);
+            yield return delay(500);
 
-        ulong time = pulseIn(6); //distanceSensor.
-        Debug.Log("Time of distanceSensor is: " + time);
-        servo.write((int)servoAngle);
+            //Until robot completes the level.:
+            while (true)
+            {
+                int speed = 100;
+                analogWrite(forwardDriveLeftPin, speed);
+                analogWrite(forwardDriveRightPin, speed);
+                time = pulseIn(6); //distanceSensor.
+                distance = (time * 0.034f * 0.5f);
+
+                if (distance < 14 && distance != 0)
+                {
+                    if (!turnedLeft)
+                    {
+                        //Rotate 90 approx. 90 degrees.
+                        analogWrite(forwardDriveLeftPin, 0);
+                        analogWrite(backwardDriveLeftPin, 20);
+                        analogWrite(forwardDriveRightPin, 20);
+                        turnedLeft = true;
+                        yield return delay(2500);
+                        analogWrite(backwardDriveLeftPin, 0);
+                        analogWrite(backwardDriveRightPin, 0);
+                        analogWrite(forwardDriveLeftPin, speed);
+                        analogWrite(forwardDriveRightPin, speed);
+                    }
+                    else
+                    {
+                        analogWrite(forwardDriveRightPin, 0);
+                        analogWrite(backwardDriveRightPin, 20);
+                        analogWrite(forwardDriveLeftPin, 20);
+                        yield return delay(2600);
+                        analogWrite(backwardDriveLeftPin, 0);
+                        analogWrite(backwardDriveRightPin, 0);
+                        analogWrite(forwardDriveRightPin, speed);
+                        analogWrite(forwardDriveLeftPin, speed);
+
+                    }
+                }
+                yield return delay(1);
+            }
+        }
+
+        //This is the line-followingbehaviour that the robot does both before and after passing the pillar.
+        if (!reachedEndOfLine)
+        {
+            int leftWrite = (int)ArduinoFunctions.Functions.map(leftSensor, 0, 255, 255, 0);
+            int rightWrite = (int)ArduinoFunctions.Functions.map(rightSensor, 0, 255, 255, 0);
+            analogWrite(0, (int)(leftSensor > leftWrite ? leftSensor / 4 : 0));
+            analogWrite(1, leftSensor <= leftWrite ? leftWrite / 2 : 0);
+            analogWrite(2, (int)(rightSensor > rightWrite ? rightSensor / 4 : 0));
+            analogWrite(3, rightSensor <= rightWrite ? rightWrite / 2 : 0);
+        }
+
+        if (!passedPillar)
+        {
+            servoAngle = 45;
+            servo.write((int)servoAngle);
+        }
+        else
+        {
+            servo.write(90); //Position the distance-sensor/ultrasonic sensor for detecting walls right in front of the robot.
+        }
+
+
+        time = pulseIn(6); //Value out of ultrasonic sensor.
+        distance = (time * 0.034f * 0.5f); //Time to distance conversion.
+
+        //Lengthy sequence of turns and driving to get around the pillar:
+        if (distance != 0 && distance < 14 && !gotToPillar)
+        {
+            //Prepare motorvalues for driving around the pillar:
+            gotToPillar = true;
+
+
+            //Set the backwards direction PWN-signal on H-bridge to 0.
+            analogWrite(1, 0);
+            analogWrite(3, 0);
+            analogWrite(forwardDriveLeftPin, 40);
+            analogWrite(forwardDriveRightPin, 20);
+            yield return delay(1500);
+
+            analogWrite(forwardDriveLeftPin, 30);
+            analogWrite(forwardDriveRightPin, 30);
+            yield return delay(1500);
+
+            //Rotate 90 approx. 90 degrees.
+            analogWrite(forwardDriveLeftPin, 0);
+            analogWrite(backwardDriveLeftPin, 20);
+            analogWrite(forwardDriveRightPin, 20);
+            yield return delay(2600);
+
+            analogWrite(backwardDriveLeftPin, 0);
+            analogWrite(forwardDriveLeftPin, 90);
+            analogWrite(forwardDriveRightPin, 90);
+            yield return delay(1700);
+
+            //Rotate 
+            analogWrite(forwardDriveLeftPin, 0);
+            analogWrite(backwardDriveLeftPin, 40);
+            analogWrite(forwardDriveRightPin, 40);
+            yield return delay(1050);
+
+            analogWrite(forwardDriveLeftPin, 0);
+            analogWrite(backwardDriveLeftPin, 0);
+            analogWrite(forwardDriveRightPin, 0);
+            analogWrite(backwardDriveRightPin, 0);
+            
+            //When passed the pillar, drive forwards until the robot finds the line again:
+            while (!passedPillar)
+            {
+                analogWrite(forwardDriveRightPin, 90);
+                analogWrite(forwardDriveLeftPin, 90);
+                if (analogRead(5) < 100)
+                {
+                    passedPillar = true;
+                }
+                yield return delay(1); //To stay in loop.
+            }
+            passedPillar = true;
+        }
 
 
         //Following region is implemented as to allow "yield return delay()" to function the same way as one would expect it to on Arduino.
